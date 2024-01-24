@@ -3,7 +3,7 @@ module.exports = function(){
     this.getAll = async function(result){
         //SELECT * FROM test1
         var pool = await conn;
-        var sqlString = "SELECT * FROM test1";
+        var sqlString = "SELECT * FROM SV";
         return await pool.request()
         .query(sqlString, function(err, data){
             if(data.recordset.length >0){
@@ -16,18 +16,19 @@ module.exports = function(){
       
     };
 
-    this.getOne = async function(id, result){
+    this.getOne = async function(newData, result){
         //SELECT * FROM test WHERE Id?
         var pool = await conn;
-        var sqlString = "SELECT * FROM test1 WHERE Id= "+id;
+        var sqlString = "SELECT * FROM SV WHERE Id= @id ";
         return await pool.request()
-        .input('varId', sql.Int, id)
+        .input('id', sql.Int, newData.Id)
         .query(sqlString, function (err, data){
             if (data.recordset.length > 0 ){
                 result(null, data.recordset[0]);
             }
             else{
                 result(true, null);
+                console.log(err);
             }
         });
     }
@@ -36,29 +37,41 @@ module.exports = function(){
         
         //INSERT INTO table ()  VALUE ()
         var pool = await conn;
-        var sqlString ="INSERT INTO test1(Name) VALUES(@name)";
+        console.log(newData);
+        var sqlString ="INSERT INTO SV ( First_Name , Last_Name , Age , Gender) VALUES (@first_name, @last_name, @age, @gender )";
+        
         return await pool.request()
-        .input('name', sql.NVarChar, newData.Name)
+        .input('first_name', sql.NVarChar, newData.first_name)
+        .input('last_name', sql.NVarChar, newData.last_name)
+        .input('age', sql.VarChar, newData.age)
+        .input('gender', sql.VarChar, newData.gender)
         .query(sqlString, function(err, data){
             if(err){
                 result(true, newData);
+                console.log(err);
             } 
             else{
                 result(null, newData)
             }
+            
         });
     };
 
     this.update = async function(newData, result){
         // UPDATE table SET ... = ...
         var pool = await conn;
-        var sqlString ="UPDATE test1 SET Name = @name WHERE Id = @id";
+        var sqlString ="UPDATE SV SET First_Name = @first_name , Last_Name =@last_name, Age =@age , Gender = @gender WHERE Id = @id";
         return await pool.request()
-        .input('name', sql.NVarChar, newData.Name)
-        .input('id', sql.Int, req.body.Id)
+        
+        .input('first_name', sql.NVarChar, newData.first_name)
+        .input('last_name', sql.NVarChar, newData.last_name)
+        .input('age', sql.VarChar, newData.age)
+        .input('gender', sql.VarChar, newData.gender)
+        .input('id', sql.Int, newData.Id)
         .query(sqlString, function(err, data){
             if(err){
                 result(true, newData);
+                console.log(err)
             } 
             else{
                 result(null, newData)
@@ -66,11 +79,11 @@ module.exports = function(){
         });
     };
 
-    this.delete = async function(id, result){
+    this.delete = async function(newData, result){
         var pool = await conn;
-        var sqlString = "DELETE FROM test1 WHERE Id= "+id;
+        var sqlString = "DELETE FROM SV WHERE Id=@id ";
         return await pool.request()
-        .input('varId', sql.Int, id)
+        .input('id', sql.Int, newData.Id)
         .query(sqlString, function(err, data){
             if(err){
                 result(true, null);

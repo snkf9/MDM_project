@@ -5,7 +5,7 @@ var config = {
     user: "sa",
     port: "1433",
     password: "123456",
-    database: "SANTOMAS",
+    database: "QLSV",
     driver: "msnodesqlv8",
     option: {
         trustedConnection: true

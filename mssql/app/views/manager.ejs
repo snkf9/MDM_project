@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MDM SANTOMAS VIỆT NAM</title>
+    <script src = "socket.io/socket.io.js"></script>
+    
+    <script>
+        var socket = io("localhost:3000/manager"); // IP tĩnh (hoặc IP động, hoặc localhost)
+    </script>
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script type="text/javascript" src="js/F1_User.js"></script>
+    <link rel="stylesheet" href="../public/CSS/Screen_Manager.css" type="text/css">
+  </head>
+  <body>
+        <!-- Optional JavaScript -->
+        <!-- ///Bootstrap/// -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+        
+ 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  -->
+            <script type="text/javascript" src="../public/js/F1_User.js"></script>
+            <link rel="stylesheet" href="../public/CSS/Screen_Manager.css" type="text/css">
+          <!-- ///Bootstrap/// -->
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        
+          <!-- ///Jquery/// -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+          <!-- ///datatable/// -->
+          <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+          <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+         
+    <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e2e8ed;">
+        <a class="navbar-brand" style="color:RED; font-weight:1000 ">SANTOMAS VIỆT NAM JSC</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">DOWN</button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <form method="POST" action="/screen_manager" class="form-inline my-2 my-lg-0">
+                        <button class="btn btn-secondary btn-lg" type="submit">MANAGER</button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form method="POST" action="/screen_partdata" class="form-inline my-2 my-lg-0">
+                        <button class="btn btn-secondary btn-lg" type="submit">PART DATA</button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form method="POST" action="/screen_measuare" class="form-inline my-2 my-lg-0">
+                        <button class="btn btn-secondary btn-lg" type="submit">MEASUARE</button>
+                    </form>
+                </li>
+                
+                <li class="nav-item active">
+                    <form method="POST" action="/screen_checksheet" class="form-inline my-2 my-lg-0">
+                        <button class="btn btn-secondary btn-lg" type="submit">CHECK SHEET</button>
+                    </form>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:black; font-weight:1000 ">FACTORY</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="#">SVN2</a>
+                        <a class="dropdown-item" href="#">SVN3</a>
+                    </div>
+                </li>
+            </ul>
+            <form method="POST" action="/screen_checksheet" class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">LOG OUT</button>
+            </form>
+
+        </div>
+    </nav>  
+    <div id="Screen_Main">
+    <div id="Screen_Main_1">
+        <p>
+            <button id="btt_user_screen" onclick="
+                fn_ScreenChange('Screen_Main_1','Screen_Main_2' )">Người dùng</button>
+            <button id="btt_tool_screen" onclick="
+                fn_ScreenChange('Screen_Main_2','Screen_Main_1' )">Thiết bị đo</button>
+        </p>
+        
+        <p>
+            <input type="text" id="addName" name="addName1" value="Tên nhân viên"> 
+        <input type="text" id="id_svn" name="addD1" value="Mã nhân viên"> 
+        <select size="1" id="dept" name="Phòng">
+            <option value="IQPC" selected="selected">
+                IQPC
+            </option>
+            <option value="QA">
+                QA
+            </option>
+            <option value="Admin">
+                Admin
+            </option>
+        </select> 
+        
+        <select size="1" id="factory1" name="Nhà máy">
+            <option value="SVN2" selected="selected">
+                SVN2
+            </option>
+            <option value="SVN3">
+                SVN3
+            </option>
+        </select> 
+
+        <select size="1" id="level" name="cấp độ">
+            <option value="Công nhân" selected="selected">
+                Công nhân
+            </option>
+            <option value="Quản lý">
+                Quản lý
+            </option>
+            <option value="admin">
+                Admin
+            </option>
+        </select> 
+        <input type="text" id="pass" name="pass_id" value="Mật khẩu">
+        <button id="addRow" onclick="fn_addUser()">Thêm tài khoản mới</button>
+        <button id="deleteButton">Xóa tài khoản</button> 
+        </p>
+        
+        <table id="user_table" class="cell-border row-border hover stripe compact" style="width:900px">
+        <thead>
+            <tr>
+                <th>Tên nhân viên</th>
+                <th>Mã nhân viên</th>
+                <th>Phòng</th>
+                <th>Nhà máy</th>
+                <th>Cấp độ</th>
+                
+                
+            </tr>
+        </thead>
+
+        <tfoot>
+            <tr>
+                <th>Tên nhân viên</th>
+                <th>Mã nhân viên</th>
+                <th>Phòng</th>
+                <th>Nhà máy</th>
+                <th>Cấp độ</th>
+                
+            </tr>
+        </tfoot>
+    </table>  
+    </div>  
+    
+    <script>
+        new DataTable('#user_table', {
+            paging: false,
+            scrollCollapse: true,
+            scrollY: '350px',
+            orderable: false,
+            
+            //Chương trình con tìm kiếm dữ liệu
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        let column = this;
+                        let title = column.footer().textContent;
+
+                        // Create input element
+                        let input = document.createElement('input');
+                        input.placeholder = title;
+                        column.footer().replaceChildren(input);
+
+                        // Event listener for user input
+                        input.addEventListener('keyup', () => {
+                            if (column.search() !== this.value) {
+                                column.search(input.value).draw();
+                            }
+                        });
+                    });
+            }
+            
+                    });
+                    const table = new DataTable('#user_table');
+                    table.on('click', 'tbody tr', (e) => {
+                    let classList = e.currentTarget.classList;
+                
+                    if (classList.contains('selected')) {
+                        classList.remove('selected');
+                    }
+                    else {
+                        table.rows('.selected').nodes().each((row) => row.classList.remove('selected'));
+                        classList.add('selected');
+                    }
+                });
+                
+                document.querySelector('#deleteButton').addEventListener('click', function () {
+                    let choise = confirm("Bạn có muốn xóa người dùng?")
+                            if (choise ==true){
+                                table.row('.selected').remove().draw(false);
+                            }
+                });
+
+    </script>
+
+    
+    <div id="Screen_Main_2">
+        <p>
+            <button id="btt_user_screen" onclick="
+                fn_ScreenChange('Screen_Main_1','Screen_Main_2' )">Người dùng</button>
+            <button id="btt_tool_screen" onclick="
+                fn_ScreenChange('Screen_Main_2','Screen_Main_1' )">Thiết bị đo</button>
+        </p>
+        
+        <p><input type="text" id="toolName" name="addTool1" value="Tên thiết bị"> 
+        <input type="text" id="tooltype" name="tootype" value="Loại thiết bị"> 
+        <button id="addTool" onclick="fn_addTool()">Thêm thiết bị</button>
+        <button id="deleteTool">Xóa thiết bị</button></p>
+
+
+        <table id="tool_table" class="cell-border row-border hover stripe compact" style="width:900px">
+        <thead>
+            <tr>
+                <th>Tên thiết bị</th>
+                <th>Loại thiết bị</th>
+                <th>Người sử dụng</th>
+                <th>Mã thước</th>
+                <th>Mã bộ nhận</th>
+                
+                
+            </tr>
+        </thead>
+
+        <tfoot>
+            <tr>
+                <th>Tên thiết bị</th>
+                <th>Loại thiết bị</th>
+                <th>Người sử dụng</th>
+                <th>Mã thước</th>
+                <th>Mã bộ nhận</th>
+                
+            </tr>
+        </tfoot>
+    </table>   
+    </div>
+        </script>
+        <script>
+            new DataTable('#tool_table', {
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '350px',
+                orderable: false,
+                
+                //Chương trình con tìm kiếm dữ liệu
+                initComplete: function () {
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            let column = this;
+                            let title = column.footer().textContent;
+
+                            // Create input element
+                            let input = document.createElement('input');
+                            input.placeholder = title;
+                            column.footer().replaceChildren(input);
+
+                            // Event listener for user input
+                            input.addEventListener('keyup', () => {
+                                if (column.search() !== this.value) {
+                                    column.search(input.value).draw();
+                                }
+                            });
+                        });
+                }
+                
+                        });
+                        const table_1 = new DataTable('#tool_table');
+                        table_1.on('click', 'tbody tr', (e) => {
+                        let classList1 = e.currentTarget.classList;
+                    
+                        if (classList1.contains('selected')) {
+                            classList1.remove('selected');
+                        }
+                        else {
+                            table_1.rows('.selected').nodes().each((row) => row.classList1.remove('selected'));
+                            classList1.add('selected');
+                        }
+                    });
+                    
+                    document.querySelector('#deleteTool').addEventListener('click', function () {
+                        let choise = confirm("Bạn có muốn xóa thiết bị?")
+                        if (choise ==true){
+                            table_1.row('.selected').remove().draw(false);
+                        }
+                        
+                    });
+
+        </script>
+    </div>
+   
+
+ </body>
+</html>

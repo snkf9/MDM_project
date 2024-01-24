@@ -10,7 +10,7 @@ exports.getList = function(req, res){
 
 exports.getById = function(req, res){
     //SELECT * FROM test WHERE Id?
-    model.getOne(req.params.id, function(err, data){
+    model.getOne(req.body, function(err, data){
         res.send({result: data, error: err});
     });
    
@@ -25,14 +25,14 @@ exports.addNew = function(req, res){
 
 exports.update = function(req, res){
     // UPDATE table SET ... = ...
-    model.update(req.params.id, function(err, data){
+    model.update(req.body, function(err, data){
         res.send({result: data, error: err});
     });
    
 };
 
 exports.delete = function(req, res){
-    model.delete(req.params.id, function(err, data){
+    model.delete(req.body, function(err, data){
             res.send({result: data, error: err});
         });
     }
